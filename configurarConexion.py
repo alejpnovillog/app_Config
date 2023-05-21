@@ -1,6 +1,7 @@
 try:
     import sys
     import os
+    import platform
     import pickle
     from app_Config import constantes
 
@@ -78,7 +79,12 @@ class ConfigHost(object):
             self.__pathHost = os.getcwd() + '\\archivos_Estaticos\\Host\\'
         else:
             os.chdir('..')
-            self.__pathHost = os.getcwd() + '\\archivos_Estaticos\\Host\\'
+
+            # determinamos en que plataforma estamos ejeutando el script
+            if platform.system() == 'Linux':
+                self.__pathHost = os.getcwd() + '/archivos_Estaticos/Host/'
+            else:
+                self.__pathHost = os.getcwd() + '\\archivos_Estaticos\\Host\\'
 
         self.__default_file = self.__pathHost + 'host.pck'
         self.__host_dict = {}
